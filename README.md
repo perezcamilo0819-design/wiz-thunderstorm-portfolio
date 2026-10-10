@@ -41,7 +41,7 @@ A local browser-based thunderstorm studio that pairs two WiZ smart bulbs with la
    ```
 
 5. Copy `config.example.json` to `config.json`.
-6. Replace the example addresses in `config.json` with the local IP addresses of your two WiZ bulbs.
+6. Replace the `REPLACE_WITH_..._IP` values in `config.json` with the local IP addresses of your two WiZ bulbs.
 7. Run the application. It opens the local control panel in your browser:
 
    ```bat
