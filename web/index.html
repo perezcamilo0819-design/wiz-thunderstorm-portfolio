@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d16">
+  <title>WiZ Thunderstorm</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="WiZ Thunderstorm home">
+        <span class="brand-mark" aria-hidden="true">ϟ</span>
+        <span><strong>STORM</strong><small>by WiZ Thunderstorm</small></span>
+      </a>
+      <div class="topbar-right">
+        <span class="connection-dot" id="engine-dot"></span>
+        <span class="connection-label" id="engine-status">Connecting to storm engine</span>
+        <span class="topbar-divider"></span>
+        <span class="bulb-badge"><span aria-hidden="true">◉</span> <span id="bulb-status">Not connected</span></span>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> YOUR ROOM, UNDER OPEN SKIES</div>
+          <h1>Settle into<br><em>the storm.</em></h1>
+          <p class="hero-description">Layered rain, moving thunder, and synchronized WiZ lighting. Make the weather yours.</p>
+          <div class="hero-actions">
+            <button class="button button-primary" id="start-button"><span class="play-icon">▶</span><span id="start-label">Start storm</span></button>
+            <button class="button button-stop" id="stop-button">Stop</button>
+          </div>
+          <div class="hero-footnote"><span class="status-pulse"></span><span id="event-status">Ready when you are</span></div>
+        </div>
+        <div class="storm-art" aria-hidden="true">
+          <div class="art-orbit orbit-one"></div>
+          <div class="art-orbit orbit-two"></div>
+          <div class="art-glow"></div>
+          <div class="cloud cloud-back"></div>
+          <div class="cloud cloud-front"><span class="cloud-shadow"></span></div>
+          <div class="lightning-bolt">ϟ</div>
+          <div class="rain-streak streak-one"></div><div class="rain-streak streak-two"></div>
+          <div class="rain-streak streak-three"></div><div class="rain-streak streak-four"></div>
+          <div class="rain-streak streak-five"></div><div class="rain-streak streak-six"></div>
+          <div class="art-caption"><span>LIVE ATMOSPHERE</span><span class="caption-eq"><i></i><i></i><i></i><i></i><i></i></span></div>
+        </div>
+      </section>
+
+      <section class="now-card" aria-label="Live storm status">
+        <div class="now-heading"><span class="live-indicator" id="live-indicator"></span><span>STORM STATUS</span></div>
+        <div class="now-stat"><span class="stat-label">State</span><strong id="storm-state">Stopped</strong></div>
+        <div class="now-stat"><span class="stat-label">Next strike</span><strong id="next-strike">--</strong></div>
+        <div class="now-stat"><span class="stat-label">Time remaining</span><strong id="timer-value">--</strong></div>
+        <div class="now-stat current-event"><span class="stat-label">Current event</span><strong id="strike-state">Idle</strong></div>
+      </section>
+
+      <section class="section presets-section">
+        <div class="section-heading">
+          <div><div class="eyebrow">ONE TAP TO THE WEATHER</div><h2>Choose a mood</h2></div>
+          <span class="selected-preset" id="selected-preset">CUSTOM MIX</span>
+        </div>
+        <div class="preset-grid">
+          <button class="preset-card preset-calm" data-preset="relaxing">
+            <span class="preset-icon">☾</span><span class="preset-info"><strong>Quiet evening</strong><small>Soft rain · distant thunder</small></span><span class="preset-arrow">↗</span>
+          </button>
+          <button class="preset-card preset-summer" data-preset="summer">
+            <span class="preset-icon">⌁</span><span class="preset-info"><strong>Summer storm</strong><small>Balanced rain · rolling sky</small></span><span class="preset-arrow">↗</span>
+          </button>
+          <button class="preset-card preset-severe" data-preset="severe">
+            <span class="preset-icon">ϟ</span><span class="preset-info"><strong>Heavy weather</strong><small>Driving rain · close strikes</small></span><span class="preset-arrow">↗</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="section sound-section">
+        <div class="section-heading">
+          <div><div class="eyebrow">SHAPE THE SOUND</div><h2>Sound layers</h2></div>
+          <span class="section-note">Changes apply live</span>
+        </div>
+        <div class="sound-grid">
+          <article class="control-card">
+            <div class="card-title-row"><span class="layer-icon rain-icon">≋</span><div><h3>Rain</h3><p>From a soft patter to a downpour</p></div><output id="rain-out">55%</output></div>
+            <input type="range" id="rain" min="0" max="100" value="55" aria-label="Rain intensity">
+            <div class="range-ends"><span>Quiet</span><span>Heavy</span></div>
+          </article>
+          <article class="control-card">
+            <div class="card-title-row"><span class="layer-icon wind-icon">↝</span><div><h3>Wind</h3><p>Low, textured gusts in the background</p></div><output id="wind-out">35%</output></div>
+            <input type="range" id="wind" min="0" max="100" value="35" aria-label="Wind intensity">
+            <div class="range-ends"><span>Still</span><span>Gusty</span></div>
+          </article>
+          <article class="control-card">
+            <div class="card-title-row"><span class="layer-icon thunder-icon">ϟ</span><div><h3>Thunder</h3><p>Set the rumble level</p></div><output id="thunder-out">42%</output></div>
+            <input type="range" id="thunder" min="0" max="100" value="42" aria-label="Thunder volume">
+            <div class="range-ends"><span>Subtle</span><span>Powerful</span></div>
+          </article>
+          <article class="control-card">
+            <div class="card-title-row"><span class="layer-icon light-icon">✧</span><div><h3>Lightning</h3><p>Brightness of your WiZ bulbs</p></div><output id="lightning-out">94%</output></div>
+            <input type="range" id="lightning" min="100" max="255" value="240" aria-label="Lightning brightness">
+            <div class="range-ends"><span>Low glow</span><span>Bright flash</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section details-grid">
+        <article class="detail-card strike-card">
+          <div class="section-heading compact"><div><div class="eyebrow">DISTANCE &amp; RHYTHM</div><h2>Strike character</h2></div></div>
+          <div class="strike-summary"><span>Close</span><span>Medium</span><span>Far</span></div>
+          <div class="strike-bars"><div class="strike-bar close-bar" id="close-bar"></div><div class="strike-bar medium-bar" id="medium-bar"></div><div class="strike-bar far-bar" id="far-bar"></div></div>
+          <div class="strike-values"><label>Close <output id="close-out">20%</output><input type="range" id="close" min="0" max="100" value="20" aria-label="Close strikes"></label><label>Medium <output id="medium-out">45%</output><input type="range" id="medium" min="0" max="100" value="45" aria-label="Medium strikes"></label><label>Far <output id="far-out">35%</output><input type="range" id="far" min="0" max="100" value="35" aria-label="Far strikes"></label></div>
+          <p class="helper-text">The mix is balanced automatically when a strike happens.</p>
+        </article>
+        <article class="detail-card timing-card">
+          <div class="section-heading compact"><div><div class="eyebrow">SET THE PACE</div><h2>Strike timing</h2></div></div>
+          <div class="timing-row"><label for="min-interval">At least</label><input type="number" id="min-interval" min="2" max="30" value="5"><span>seconds</span></div>
+          <div class="timing-row"><label for="max-interval">Up to</label><input type="number" id="max-interval" min="3" max="45" value="14"><span>seconds</span></div>
+          <div class="duration-row"><label for="duration">Storm duration</label><select id="duration"><option value="unlimited">Until I stop</option><option value="15">15 minutes</option><option value="30">30 minutes</option><option value="60">1 hour</option></select></div>
+          <label class="sound-only-toggle"><input type="checkbox" id="audio-only"><span class="toggle-track"><span></span></span><span><strong>Sound only</strong><small>Run audio without WiZ bulbs</small></span></label>
+          <p class="helper-text">Each strike shifts in position, so thunder moves across the room.</p>
+        </article>
+      </section>
+
+      <section class="section test-section">
+        <div class="test-copy"><div class="eyebrow">TRY A MOMENT</div><h2>Preview the storm</h2><p>Test a light flash or hear a thunder strike without starting the full storm.</p></div>
+        <div class="test-actions"><select id="test-type" aria-label="Preview strike distance"><option value="medium">Medium strike</option><option value="close">Close strike</option><option value="far">Far strike</option></select><button class="button button-quiet" id="test-lightning">Test light</button><button class="button button-quiet" id="test-thunder">Test thunder</button></div>
+      </section>
+    </main>
+    <footer><span>STORM, ON YOUR TERMS.</span><span>Runs locally on this computer · Audio stays on your device</span></footer>
+  </div>
+</body>
+</html>
